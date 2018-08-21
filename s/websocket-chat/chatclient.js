@@ -15,11 +15,14 @@ function setUsername() {
 }
 
 function connect() {
-  var serverUrl = "ws://" + window.location.hostname + ":6502";
+  console.log('fn connect called');
+  //var serverUrl = "ws://" + window.location.hostname + ":6502";
+  var serverUrl = "ws://localhost:6502";
 
   connection = new WebSocket(serverUrl);
 
   connection.onopen = function(evt) {
+    console.log('client is now connected to server');
     document.getElementById("text").disabled = false;
     document.getElementById("send").disabled = false;
   };
@@ -58,7 +61,8 @@ function connect() {
 
     if (text.length) {
       f.write(text);
-      document.getElementById("chatbox").contentWindow.scrollByPages(1);
+      // todo scroll at bottom
+      // document.getElementById("chatbox").contentWindow.scrollByPages(1);
     }
   };
 }
