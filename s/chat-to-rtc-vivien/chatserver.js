@@ -86,12 +86,7 @@ function makeUserListMessage() {
 
 function sendUserListToAll() {
   var userListMsg = makeUserListMessage();
-  var userListMsgStr = JSON.stringify(userListMsg);
-  var i;
-
-  for (i=0; i<connectionArray.length; i++) {
-    connectionArray[i].sendUTF(userListMsgStr);
-  }
+  broadCastToAllUsers(JSON.stringify(userListMsg));
 }
 
 wsServer.on('connect', function(connection) {
@@ -166,9 +161,12 @@ wsServer.on('connect', function(connection) {
             var msgString = JSON.stringify(msg);
             var i;
 
-            for (i=0; i<connectionArray.length; i++) {
-              connectionArray[i].sendUTF(msgString);
+            if (msg.target && msg.target.length > 0) {
+              sendToOneUser(msg.target, msgString);
+            } else {
+              broadCastToAllUsers(msgString);
             }
+
           }
       }
   });
@@ -184,3 +182,23 @@ wsServer.on('connect', function(connection) {
     console.log((new Date()) + " Peer " + connection.remoteAddress + " disconnected.");
   });
 });
+
+function broadCastToAllUsers(msgString) {
+  var i;
+
+  for (i=0; i<connectionArray.length; i++) {
+    connectionArray[i].sendUTF(msgString);
+  }
+}
+
+function sendToOneUser(target, msgString) {
+  var isUnique = true;
+  var i;
+
+  for (i=0; i<connectionArray.length; i++) {
+    if (connectionArray[i].username === target) {
+      connectionArray[i].sendUTF(msgString);
+      break;
+    }
+  }
+}
