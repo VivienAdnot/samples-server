@@ -13,7 +13,7 @@
 
 // Get our hostname
 
-var myHostname = window.location.hostname;
+var myHostname = 'localhost';
 console.log("Hostname: " + myHostname);
 
 // WebSocket chat/signaling channel variables.
