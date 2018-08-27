@@ -1,0 +1,13 @@
+{
+  "name": "webrtc-grafikart",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "Vivien Adnot",
+  "license": "ISC",
+  "dependencies": {
+    "websocket": "^1.0.26"
+  }
+}

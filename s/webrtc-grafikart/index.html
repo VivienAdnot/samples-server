@@ -1,0 +1,43 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Place favicon.ico in the root directory -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Réception</h2>
+                    <video id="receiver-video" width="100%" height="400px"></video>
+                    <p>
+                        <button id="start" class="btn-primary">Démarrer la conversation</button>
+                    </p>
+                    <textarea id="offer" cols="30" rows="10" class="form-control"></textarea>
+                </div>
+
+                <div class="col-md-6">
+                    <h2>Envoi</h2>
+                    <video id="emitter-video" width="100%" height="400px"></video>
+                    <form id="incoming">
+                        <div class="form-group">
+                            <textarea class="form-control"></textarea>
+                        </div>
+                        <p>
+                            <button type="submit">Enregistrer l'offre</button>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script src="js/vendors/simplePeer.min.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>
