@@ -4,3 +4,4 @@ node_modules/
 *.js-bak
 .vscode
 .remote-sync.json
+**/.DS_Store
