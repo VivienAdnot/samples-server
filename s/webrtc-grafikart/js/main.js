@@ -1,5 +1,3 @@
-let p = null;
-
 const bindEvents = (p) => {
 
     console.log('bindEvents called');
@@ -20,22 +18,28 @@ const bindEvents = (p) => {
         receiverVideo.srcObject = stream;
         receiverVideo.play();
 
+    });
+
+    document.querySelector('#incoming').addEventListener('submit', (ev) => {
+
+        ev.preventDefault();
+
+        const textareaValue = ev.target.querySelector('textarea').value;
+        const existingSdpOffer = JSON.parse(textareaValue);
+        p.signal(existingSdpOffer);
+
     })
 
 };
-
-// peer A sends
-document.querySelector('#start').addEventListener('click', (event) => {
-
-    console.log('start clicked');
+const startPeer = (isInitiator) => {
 
     navigator.getUserMedia({
         video: true,
         audio: false
     }, (stream) => {
 
-        p = new SimplePeer({
-            initiator: true,
+        const p = new SimplePeer({
+            initiator: isInitiator,
             stream,
             trickle: false // ? ça fait quoi ?
         });
@@ -48,27 +52,16 @@ document.querySelector('#start').addEventListener('click', (event) => {
 
     }, (error) => console.log('ERROR', error));
 
+}
+
+document.querySelector('#start').addEventListener('click', (event) => {
+
+    startPeer(true);
+
 });
 
-// peer B receives
-document.querySelector('#incoming').addEventListener('submit', (ev) => {
+document.querySelector('#receive').addEventListener('click', (event) => {
 
-    ev.preventDefault();
-    console.log('incoming clicked');
+    startPeer(false);
 
-    if (p == null) {
-
-        p = new SimplePeer({
-            initiator: false,
-            trickle: false
-        });
-
-        bindEvents(p);
-
-    }
-
-    const textareaValue = ev.target.querySelector('textarea').value;
-    const existingSdpOffer = JSON.parse(textareaValue);
-    p.signal(existingSdpOffer);
-
-})
+});
