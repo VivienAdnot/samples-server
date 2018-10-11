@@ -2,7 +2,13 @@
   "name": "websocket-chat",
   "version": "1.0.0",
   "description": "A simple WebSocket-based chat server.",
+  "author": "Vivien Adnot",
+  "license": "ISC",
+  "scripts": {
+    "start": "nodemon chatserver.js"
+  },
   "dependencies": {
     "websocket": "^1.0.26"
-  }
+  },
+  "devDependencies": {}
 }
